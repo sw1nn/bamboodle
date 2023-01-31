@@ -38,14 +38,14 @@ $ yay -U bamboodle-git*.tar.zst
 ## Usage
 
 ``` shell
-# If you have a custom domain.
+# If you have a custom domain (can also use -d a-company.bamboohr.com command line option)
 $ export BAMBOOHR_DOMAIN=a-company.bamboohr.com 
 
 # Store your credentials in password-store
 $ pass insert <username>/${BAMBOOHR_DOMAIN:-bamboohr.com}
 
 # The last line are the cookies you need for scripting.
-$ bamboodle <username>
+$ bamboodle -v <username>
 Hunting for cookies for <username>
 Logging into https://a-company.bamboohr.com...
 Entered username
@@ -56,8 +56,8 @@ Cookie is:
 
 trusted_browser=XXXXX;lluidt=XXXXX;lluidh=XXXXX;llfn=Bob;lluid=XXXXX;PHPSESSID=XXXXX
 
-# the logging is sent to stderr, so in a script something like this:
-$ COOKIE=$(bamboodle <username> 2> /dev/null)
+# default output is just the cookie, to be used for scripting.
+$ COOKIE=$(bamboodle <username>)
 
 
 ```
