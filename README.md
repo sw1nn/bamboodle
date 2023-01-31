@@ -6,7 +6,12 @@ scripting
 
 ## Installation
 
-You must install selenium and a suitable driver.
+You must install python-selenium and a suitable driver from AUR
+(chromedriver)
+
+The command retrieves credentials from [password
+store](https://github.com/zx2c4/password-store) which should be
+installed and configured properly
 
 ### Arch linux
 
@@ -17,8 +22,8 @@ around pacman that allows installation of AUR packages.
 ``` shell
 $ cd ${REPO_HOME}/package/arch
 
-# Install AUR package requirements
-$ yay -S selenium chromedriver
+# Install AUR package requirements, which are not installed by makepkg -s
+$ yay -S python-selenium chromedriver
 
 
 # Will install dependencies that can be found via pacman
@@ -35,6 +40,9 @@ $ yay -U bamboodle-git*.tar.zst
 ``` shell
 # If you have a custom domain.
 $ export BAMBOOHR_DOMAIN=a-company.bamboohr.com 
+
+# Store your credentials in password-store
+$ pass insert <username>/${BAMBOOHR_DOMAIN:-bamboohr.com}
 
 # The last line are the cookies you need for scripting.
 $ bamboodle <username>
