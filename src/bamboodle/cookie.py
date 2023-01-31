@@ -74,6 +74,7 @@ def cookie_for(id):
         login(driver, id)
 
         cookies = { c['name'] : c['value'] for c in driver.get_cookies() if re.search(r"juxtpro.bamboohr\.com", c["domain"])}
+        print("Cookie is: \n", file=sys.stderr)
         print(';'.join(f"{k}={v}" for k,v in cookies.items()))
 
 def main():
