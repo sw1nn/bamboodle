@@ -5,7 +5,7 @@ import sys
 import requests
 import pexpect
 
-from argparse import ArgumentParser
+from argparse import ArgumentParser, BooleanOptionalAction
 from selenium import webdriver
 from selenium.webdriver import Keys
 from selenium.webdriver.chrome.options import Options
@@ -70,7 +70,8 @@ def get_driver():
     chrome_options.add_argument("--disable-extensions")
     chrome_options.add_argument("--disable-gpu")
     # chrome_options.add_argument("--no-sandbox") # linux only
-    chrome_options.add_argument("--headless")
+    if options.headless:
+        chrome_options.add_argument("--headless")
 
     return webdriver.Chrome("chromedriver", options=chrome_options)
 
@@ -96,6 +97,9 @@ def init_argparse() -> ArgumentParser:
                         help="log progress to stderr")
     parser.add_argument("-d", "--domain",
                         help="The domain to use for the login, defaults to the value of the BAMBOOHR_DOMAIN environment variable, or bamboohr.com if not set")
+    parser.add_argument("--headless", default=True,
+                        action=BooleanOptionalAction,
+                        help="Run the browser in headless mode (default: True)")
     parser.add_argument("username")
 
     return parser
