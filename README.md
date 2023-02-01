@@ -13,11 +13,21 @@ The command retrieves credentials from [password
 store](https://github.com/zx2c4/password-store) which should be
 installed and configured properly
 
+### General
+
+* Arrange for the dependencies in `Pipfile` to be installed.
+
+``` shell
+$ cd ${REPO_HOME}
+$ python3 setup.py install
+```
+
 ### Arch linux
 
 in `package/arch` you will find a `PKGBUILD` file that will build a
 package suitable for installing with pacman (or more likely a wrapper
-around pacman that allows installation of AUR packages.
+around pacman, like [Yay](https://github.com/Jguer/yay), that allows
+installation of AUR packages)
 
 ``` shell
 $ cd ${REPO_HOME}/package/arch
@@ -37,12 +47,34 @@ $ yay -U bamboodle-git*.tar.zst
 
 ## Usage
 
+### Common
+
+Relevant however you invoke the tool.
+
 ``` shell
 # If you have a custom domain (can also use -d a-company.bamboohr.com command line option)
 $ export BAMBOOHR_DOMAIN=a-company.bamboohr.com 
 
 # Store your credentials in password-store
 $ pass insert <username>/${BAMBOOHR_DOMAIN:-bamboohr.com}
+```
+
+### Call python directly
+``` shell
+$ python3 src/bambdoodle/cookie.py -v <username>
+Hunting for cookies for <username>
+Logging into https://a-company.bamboohr.com...
+Entered username
+Entered password
+Clicked trust button
+DONE
+Cookie is:
+
+trusted_browser=XXXXX;lluidt=XXXXX;lluidh=XXXXX;llfn=Bob;lluid=XXXXX;PHPSESSID=XXXXX
+```
+
+### Arch linux
+``` shell
 
 # The last line are the cookies you need for scripting.
 $ bamboodle -v <username>
@@ -58,6 +90,4 @@ trusted_browser=XXXXX;lluidt=XXXXX;lluidh=XXXXX;llfn=Bob;lluid=XXXXX;PHPSESSID=X
 
 # default output is just the cookie, to be used for scripting.
 $ COOKIE=$(bamboodle <username>)
-
-
 ```
