@@ -46,7 +46,6 @@ def login(driver, id):
     )
 
     login.send_keys(id)
-    login.send_keys(Keys.RETURN)
     log("Entered username")
     password = WebDriverWait(driver, 5).until(
         EC.presence_of_element_located((By.ID, "password"))
